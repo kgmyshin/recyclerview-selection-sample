@@ -12,6 +12,8 @@ class ItemAdapter(
 
     private val inflater = LayoutInflater.from(context)
 
+    var selectionChecker: SelectionChecker? = null
+
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
@@ -21,13 +23,22 @@ class ItemAdapter(
             false
     )
 
+    fun getItem(position: Int): Item = itemList[position]
+
+    fun getPosition(item: Item): Int = itemList.indexOf(item)
+
     override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(
             holder: ItemViewHolder,
             position: Int
     ) {
-        holder.bind(itemList[position])
+        val item = itemList[position]
+        holder.bind(
+                selectionChecker?.isSelected(item) ?: false,
+                position,
+                itemList[position]
+        )
     }
 
 }

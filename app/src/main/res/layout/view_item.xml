@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="position"
+            type="int" />
+
+        <variable
             name="item"
             type="com.kgmyshin.recyclerview.selection.sample.Item" />
 
@@ -14,6 +18,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/selector_item"
         android:padding="8dp">
 
         <TextView

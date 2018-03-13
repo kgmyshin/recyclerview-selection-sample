@@ -23,9 +23,20 @@ class ItemViewHolder private constructor(
         )
     }
 
-    fun bind(item: Item) {
+    fun bind(
+            isActivated: Boolean,
+            position: Int,
+            item: Item
+    ) {
+        binding.position = position
         binding.item = item
+        binding.root.isActivated = isActivated
         binding.executePendingBindings()
     }
+
+    fun getItemDetails(): ItemDetails = ItemDetails(
+            position = binding.position,
+            item = binding.item
+    )
 
 }
