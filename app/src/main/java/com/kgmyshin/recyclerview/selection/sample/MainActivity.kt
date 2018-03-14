@@ -80,7 +80,9 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_show -> {
                 val selectionText = selectionTracker?.let {
                     it.selection.map {
-                        val target = it as Book // bug: selection dont have type parameter
+                        // bug?: selection dont have type parameter
+                        // https://issuetracker.google.com/issues/74514352
+                        val target = it as Book
                         target.title
                     }.joinToString("\n")
                 }
