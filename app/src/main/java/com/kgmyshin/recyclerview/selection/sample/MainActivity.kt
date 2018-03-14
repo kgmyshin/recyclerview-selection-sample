@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 MyDetailsLookup(binding.recyclerView),
                 StorageStrategy.createParcelableStorage(Item::class.java))
                 .withOnItemActivatedListener { item, e ->
-                    Log.e("aaaaa", item.toString())
+                    Log.e("MainActivity", item.toString())
                     return@withOnItemActivatedListener true
                 }
                 .build()
