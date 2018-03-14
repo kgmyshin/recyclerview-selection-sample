@@ -16,16 +16,16 @@ import com.kgmyshin.recyclerview.selection.sample.databinding.ActivityMainBindin
 
 class MainActivity : AppCompatActivity() {
 
-    private var selectionTracker: SelectionTracker<Item>? = null
+    private var selectionTracker: SelectionTracker<Book>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         val itemList = (1L..300L).map {
-            Item(it, "title$it", "subtitle$it")
+            Book(it, "title$it", "subtitle$it")
         }
-        val adapter = ItemAdapter(this, itemList)
+        val adapter = BookAdapter(this, itemList)
         binding.recyclerView.adapter = adapter
         (binding.recyclerView.layoutManager as? LinearLayoutManager)?.run {
             binding.recyclerView.addItemDecoration(
@@ -36,12 +36,12 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        selectionTracker = SelectionTracker.Builder<Item>(
+        selectionTracker = SelectionTracker.Builder<Book>(
                 "my-selection-id",
                 binding.recyclerView,
-                ItemKeyProvider(adapter),
-                MyDetailsLookup(binding.recyclerView),
-                StorageStrategy.createParcelableStorage(Item::class.java))
+                BookKeyProvider(adapter),
+                BookDetailsLookup(binding.recyclerView),
+                StorageStrategy.createParcelableStorage(Book::class.java))
                 .withOnItemActivatedListener { item, e ->
                     Log.e("MainActivity", item.toString())
                     return@withOnItemActivatedListener true
@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         adapter.selectionChecker = object : SelectionChecker {
-            override fun isSelected(item: Item): Boolean =
-                    selectionTracker?.isSelected(item) ?: false
+            override fun isSelected(book: Book): Boolean =
+                    selectionTracker?.isSelected(book) ?: false
         }
 
         if (savedInstanceState != null) {
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_show -> {
                 val selectionText = selectionTracker?.let {
                     it.selection.map {
-                        val target = it as Item // bug: selection dont have type parameter
+                        val target = it as Book // bug: selection dont have type parameter
                         target.title
                     }.joinToString("\n")
                 }

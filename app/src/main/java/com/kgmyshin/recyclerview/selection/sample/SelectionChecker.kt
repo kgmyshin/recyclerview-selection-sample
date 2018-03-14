@@ -2,6 +2,6 @@ package com.kgmyshin.recyclerview.selection.sample
 
 interface SelectionChecker {
 
-    fun isSelected(item: Item): Boolean
+    fun isSelected(book: Book): Boolean
 
 }

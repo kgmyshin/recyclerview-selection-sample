@@ -4,14 +4,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.MotionEvent
 import androidx.recyclerview.selection.ItemDetailsLookup
 
-class MyDetailsLookup(
+class BookDetailsLookup(
         private val recyclerView: RecyclerView
-) : ItemDetailsLookup<Item>() {
+) : ItemDetailsLookup<Book>() {
 
-    override fun getItemDetails(e: MotionEvent): ItemDetails<Item>? = recyclerView.findChildViewUnder(
+    override fun getItemDetails(e: MotionEvent): ItemDetails<Book>? = recyclerView.findChildViewUnder(
             e.x,
             e.y
     )?.let {
-        (recyclerView.getChildViewHolder(it) as? ItemViewHolder)?.getItemDetails()
+        (recyclerView.getChildViewHolder(it) as? BookViewHolder)?.getItemDetails()
     }
 }

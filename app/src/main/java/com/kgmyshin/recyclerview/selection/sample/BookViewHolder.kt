@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kgmyshin.recyclerview.selection.sample.databinding.ViewItemBinding
 
-class ItemViewHolder private constructor(
+class BookViewHolder private constructor(
         private val binding: ViewItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -14,7 +14,7 @@ class ItemViewHolder private constructor(
                 inflater: LayoutInflater,
                 parent: ViewGroup?,
                 attachToRoot: Boolean
-        ): ItemViewHolder = ItemViewHolder(
+        ): BookViewHolder = BookViewHolder(
                 ViewItemBinding.inflate(
                         inflater,
                         parent,
@@ -26,17 +26,17 @@ class ItemViewHolder private constructor(
     fun bind(
             isActivated: Boolean,
             position: Int,
-            item: Item
+            book: Book
     ) {
         binding.position = position
-        binding.item = item
+        binding.book = book
         binding.root.isActivated = isActivated
         binding.executePendingBindings()
     }
 
-    fun getItemDetails(): ItemDetails = ItemDetails(
+    fun getItemDetails(): BookDetails = BookDetails(
             position = binding.position,
-            item = binding.item
+            book = binding.book
     )
 
 }
