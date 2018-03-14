@@ -3,10 +3,10 @@ package com.kgmyshin.recyclerview.selection.sample
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.kgmyshin.recyclerview.selection.sample.databinding.ViewItemBinding
+import com.kgmyshin.recyclerview.selection.sample.databinding.ViewBookBinding
 
-class ItemViewHolder private constructor(
-        private val binding: ViewItemBinding
+class BookViewHolder private constructor(
+        private val binding: ViewBookBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
@@ -14,8 +14,8 @@ class ItemViewHolder private constructor(
                 inflater: LayoutInflater,
                 parent: ViewGroup?,
                 attachToRoot: Boolean
-        ): ItemViewHolder = ItemViewHolder(
-                ViewItemBinding.inflate(
+        ): BookViewHolder = BookViewHolder(
+                ViewBookBinding.inflate(
                         inflater,
                         parent,
                         attachToRoot
@@ -26,17 +26,17 @@ class ItemViewHolder private constructor(
     fun bind(
             isActivated: Boolean,
             position: Int,
-            item: Item
+            book: Book
     ) {
         binding.position = position
-        binding.item = item
+        binding.book = book
         binding.root.isActivated = isActivated
         binding.executePendingBindings()
     }
 
-    fun getItemDetails(): ItemDetails = ItemDetails(
+    fun getItemIdDetails(): BookIdDetails = BookIdDetails(
             position = binding.position,
-            item = binding.item
+            id = binding.book?.id
     )
 
 }

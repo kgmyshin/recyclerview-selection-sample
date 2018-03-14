@@ -9,5 +9,5 @@
         android:layout_height="match_parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:context=".MainActivity"
-        tools:listitem="@layout/view_item" />
+        tools:listitem="@layout/view_book" />
 </layout>

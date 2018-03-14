@@ -5,39 +5,45 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-class ItemAdapter(
+class BookAdapter(
         context: Context,
-        private val itemList: List<Item>
-) : RecyclerView.Adapter<ItemViewHolder>() {
+        private val bookList: List<Book>
+) : RecyclerView.Adapter<BookViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
 
     var selectionChecker: SelectionChecker? = null
 
+    init {
+        setHasStableIds(true)
+    }
+
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-    ): ItemViewHolder = ItemViewHolder.create(
+    ): BookViewHolder = BookViewHolder.create(
             inflater,
             parent,
             false
     )
 
-    fun getItem(position: Int): Item = itemList[position]
+    fun getItem(position: Int): Book = bookList[position]
 
-    fun getPosition(item: Item): Int = itemList.indexOf(item)
+    fun getPosition(book: Book): Int = bookList.indexOf(book)
 
-    override fun getItemCount(): Int = itemList.size
+    override fun getItemId(position: Int): Long = bookList[position].id
+
+    override fun getItemCount(): Int = bookList.size
 
     override fun onBindViewHolder(
-            holder: ItemViewHolder,
+            holder: BookViewHolder,
             position: Int
     ) {
-        val item = itemList[position]
+        val item = bookList[position]
         holder.bind(
-                selectionChecker?.isSelected(item) ?: false,
+                selectionChecker?.isSelected(item.id) ?: false,
                 position,
-                itemList[position]
+                bookList[position]
         )
     }
 
